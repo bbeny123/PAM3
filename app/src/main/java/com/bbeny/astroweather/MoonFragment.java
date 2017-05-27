@@ -38,7 +38,7 @@ public class MoonFragment extends Fragment implements IAstroFragment{
         fullMoon.setText(AstroTools.dateFormat(moonInfo.getNextFullMoon()));
         newMoon.setText(AstroTools.dateFormat(moonInfo.getNextNewMoon()));
         illumination.setText(AstroTools.illuminationFormat(moonInfo.getIllumination()));
-        moonAge.setText(AstroTools.azimuthFormat(moonInfo.getAge()));
+        moonAge.setText(AstroTools.azimuthFormat(moonInfo.getAge() / 7));
     }
 
 }

@@ -2,29 +2,34 @@ package com.bbeny.astroweather;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Handler;
 
 import com.astrocalculator.AstroCalculator;
-import com.astrocalculator.AstroDateTime;
 
 public class MainActivity extends FragmentActivity  {
     private ViewPager mPager;
     private ScreenSlidePagerAdapter mPagerAdapter;
     private AstroCalculator astroCalculator;
+    private IAstroFragment sun;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       mPager = (ViewPager) findViewById(R.id.pager);
-        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        mPagerAdapter.addFragment(new SunFragment());
-        mPagerAdapter.addFragment(new MoonFragment());
-        mPager.setAdapter(mPagerAdapter);
+        if(findViewById(R.id.astroCalc).getTag().equals("small_screen")) {
+            mPager = (ViewPager) findViewById(R.id.astroCalc);
+            mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+            mPagerAdapter.addFragment(new SunFragment());
+            mPagerAdapter.addFragment(new MoonFragment());
+            mPager.setAdapter(mPagerAdapter);
+        } else {
+            sun = (IAstroFragment) getSupportFragmentManager().findFragmentById(R.id.sunFragment);
+        }
         astroInit();
-       Dupa();
+        Dupa();
+
     }
 
     private void astroInit() {
@@ -45,8 +50,9 @@ public class MainActivity extends FragmentActivity  {
         final int delay = 1000; //milliseconds
         h.postDelayed(new Runnable(){
             public void run(){
-                IAstroFragment a = (IAstroFragment) mPagerAdapter.getItem(0);
+             //   IAstroFragment a = (IAstroFragment) mPagerAdapter.getItem(0);
              //   a.update();
+                sun.update();
                 h.postDelayed(this, delay);
             }
         }, delay);
