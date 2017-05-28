@@ -10,20 +10,28 @@ android:orientation="vertical"
 android:weightSum="1"
 android:tag="big_screen">
 
-<fragment
-    android:id="@+id/sunFragment"
-    class="com.bbeny.astroweather.SunFragment"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    tools:layout="@layout/fragment_sun"
-    android:layout_weight="0.5"/>
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.bbeny.astroweather.TimeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        tools:layout="@layout/fragment_time" />
 
-<fragment
+    <fragment
+        android:id="@+id/sunFragment"
+        android:name="com.bbeny.astroweather.SunFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.45"
+        tools:layout="@layout/fragment_sun" />
+
+    <fragment
     android:id="@+id/moonFragment"
     android:name="com.bbeny.astroweather.MoonFragment"
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    tools:layout="@layout/fragment_moon"
-    android:layout_weight="0.5"/>
+    android:layout_weight="0.45"
+    tools:layout="@layout/fragment_moon" />
 
 </LinearLayout>

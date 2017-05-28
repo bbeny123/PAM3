@@ -6,24 +6,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:tag="big_screen"
     android:weightSum="1">
 
     <fragment
-        android:id="@+id/sunFragment"
-        class="com.bbeny.astroweather.SunFragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5"
-        tools:layout="@layout/fragment_sun" />
+        android:id="@+id/fragment2"
+        android:name="com.bbeny.astroweather.TimeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+        tools:layout="@layout/fragment_time" />
 
-    <fragment
-        android:id="@+id/moonFragment"
-        android:name="com.bbeny.astroweather.MoonFragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5"
-        tools:layout="@layout/fragment_moon" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.85"
+        android:orientation="horizontal">
+
+        <fragment
+            android:id="@+id/sunFragment"
+            android:name="com.bbeny.astroweather.SunFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            tools:layout="@layout/fragment_sun" />
+
+        <fragment
+            android:id="@+id/moonFragment"
+            android:name="com.bbeny.astroweather.MoonFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            tools:layout="@layout/fragment_moon" />
+
+    </LinearLayout>
 
 </LinearLayout>
