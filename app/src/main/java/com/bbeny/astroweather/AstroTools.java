@@ -24,7 +24,7 @@ class AstroTools {
 
     static int getRefreshRate(final Context context) {
         SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        return Integer.parseInt(config.getString(PREFERENCES_REFRESH, "15")) * 1000;
+        return Integer.parseInt(config.getString(PREFERENCES_REFRESH, "15")) * 60000;
     }
 
     static String getLatitude(final Context context) {
