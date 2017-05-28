@@ -5,4 +5,5 @@
     <color name="colorPrimaryDark">#0a1560</color>
     <color name="colorAccent">#FF4081</color>
     <color name="textColor">#08407c</color>
+    <color name="colorTime">#1b6cc1</color>
 </resources>

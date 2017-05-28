@@ -32,6 +32,10 @@ public class AstroTools {
         return new AstroDateTime(year, month, day, hour, minute, second, timeZone, daylightSaving);
     }
 
+    public static String getCurrentTime() {
+        return new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new GregorianCalendar().getTime());
+    }
+
     public static String timeFormat(AstroDateTime dateTime) {
         GregorianCalendar cal = astroDateTimeToGregorianCalendar(dateTime);
         return new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(cal.getTime());

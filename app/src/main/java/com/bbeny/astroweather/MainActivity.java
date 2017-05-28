@@ -23,12 +23,13 @@ public class MainActivity extends FragmentActivity  {
             mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
             mPagerAdapter.addFragment(new SunFragment());
             mPagerAdapter.addFragment(new MoonFragment());
+            mPagerAdapter.addFragment(new TimeFragment());
             mPager.setAdapter(mPagerAdapter);
         } else {
             sun = (IAstroFragment) getSupportFragmentManager().findFragmentById(R.id.sunFragment);
         }
         astroInit();
-        Dupa();
+      //  Dupa();
 
     }
 

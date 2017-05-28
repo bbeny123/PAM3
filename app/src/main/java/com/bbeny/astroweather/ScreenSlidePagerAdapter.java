@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-    private static final int NUM_PAGES = 2;
+    private static final int NUM_PAGES = 3;
     private final List<Fragment> mFragmentList = new ArrayList<>();
 
     public ScreenSlidePagerAdapter(FragmentManager fm) {
