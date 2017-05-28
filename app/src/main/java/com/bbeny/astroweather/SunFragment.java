@@ -12,15 +12,15 @@ import com.astrocalculator.AstroCalculator;
 
 public class SunFragment extends Fragment {
 
-    TextView sunriseAzimuth;
-    TextView sunriseTime;
-    TextView sunsetAzimuth;
-    TextView sunsetTime;
-    TextView morningTime;
-    TextView eveningTime;
-    AstroCalculator.SunInfo sunInfo;
-    Handler h;
-    int delay;
+    private TextView sunriseAzimuth;
+    private TextView sunriseTime;
+    private TextView sunsetAzimuth;
+    private TextView sunsetTime;
+    private TextView morningTime;
+    private TextView eveningTime;
+    private AstroCalculator.SunInfo sunInfo;
+    private Handler h;
+    private int delay;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class SunFragment extends Fragment {
         return view;
     }
 
-    public void setInfo() {
+    private void setInfo() {
         sunriseAzimuth.setText(AstroTools.azimuthFormat(sunInfo.getAzimuthRise()));
         sunriseTime.setText(AstroTools.timeFormat(sunInfo.getSunrise()));
         sunsetAzimuth.setText(AstroTools.azimuthFormat(sunInfo.getAzimuthSet()));

@@ -19,12 +19,11 @@ public class ConfigActivity extends Activity implements View.OnClickListener {
     private static final String PREFERENCES_LONGITUDE = "longitudeField";
     private static final String PREFERENCES_LATITUDE = "latitudeField";
     private static final String PREFERENCES_REFRESH = "refreshField";
-    SharedPreferences config;
+    private SharedPreferences config;
 
-    EditText longitudeConfig;
-    EditText latitudeConfig;
-    EditText refreshConfig;
-    Button okButton;
+    private EditText longitudeConfig;
+    private EditText latitudeConfig;
+    private EditText refreshConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class ConfigActivity extends Activity implements View.OnClickListener {
         longitudeConfig = (EditText) findViewById(R.id.longitudeConfig);
         latitudeConfig = (EditText) findViewById(R.id.latitudeConfig);
         refreshConfig = (EditText) findViewById(R.id.refreshConfig);
-        okButton = (Button) findViewById(R.id.configButton);
+        Button okButton = (Button) findViewById(R.id.configButton);
         okButton.setOnClickListener(this);
         loadConfig();
     }

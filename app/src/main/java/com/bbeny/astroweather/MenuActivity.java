@@ -17,7 +17,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
     private static final String PREFERENCES_LONGITUDE = "longitudeField";
     private static final String PREFERENCES_LATITUDE = "latitudeField";
     private static final String PREFERENCES_REFRESH = "refreshField";
-    SharedPreferences config;
+    private SharedPreferences config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

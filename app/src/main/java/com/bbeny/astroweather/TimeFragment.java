@@ -14,9 +14,9 @@ import android.widget.TextView;
 
 public class TimeFragment extends Fragment {
 
-    TextView time;
-    TextView latitude;
-    TextView longitude;
+    private TextView time;
+    private TextView latitude;
+    private TextView longitude;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

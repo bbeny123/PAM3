@@ -12,15 +12,15 @@ import com.astrocalculator.AstroCalculator;
 
 public class MoonFragment extends Fragment {
 
-    TextView moonriseTime;
-    TextView moonsetTime;
-    TextView fullMoon;
-    TextView newMoon;
-    TextView illumination;
-    TextView moonAge;
-    AstroCalculator.MoonInfo moonInfo;
-    Handler h;
-    int delay;
+    private TextView moonriseTime;
+    private TextView moonsetTime;
+    private TextView fullMoon;
+    private TextView newMoon;
+    private TextView illumination;
+    private TextView moonAge;
+    private AstroCalculator.MoonInfo moonInfo;
+    private Handler h;
+    private int delay;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
