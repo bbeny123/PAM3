@@ -1,5 +1,9 @@
 package com.bbeny.astroweather;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.astrocalculator.AstroCalculator;
 import com.astrocalculator.AstroDateTime;
 
@@ -11,12 +15,39 @@ import java.util.Locale;
  * Created by bbeny on 27.05.2017.
  */
 
-public class AstroTools {
+class AstroTools {
 
-    public static AstroCalculator getAstroCalculator() {
+    private static final String PREFERENCES_NAME = "astroPreferences";
+    private static final String PREFERENCES_LONGITUDE = "longitudeField";
+    private static final String PREFERENCES_LATITUDE = "latitudeField";
+    private static final String PREFERENCES_REFRESH = "refreshField";
+
+    static int getRefreshRate(final Context context) {
+        SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
+        return Integer.parseInt(config.getString(PREFERENCES_REFRESH, "15")) * 1000;
+    }
+
+    static String getLatitude(final Context context) {
+        SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
+        return config.getString(PREFERENCES_LATITUDE, "");
+    }
+
+    static String getLongitude(final Context context) {
+        SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
+        return config.getString(PREFERENCES_LONGITUDE, "");
+    }
+
+    static AstroCalculator getAstroCalculator(final Context context) {
         AstroDateTime astroDateTime = getAstroDateTime();
-        AstroCalculator.Location astroLocation = new AstroCalculator.Location(10,10);
+        AstroCalculator.Location astroLocation = getAstroLocation(context);
         return new AstroCalculator(astroDateTime, astroLocation);
+    }
+
+    private static AstroCalculator.Location getAstroLocation(final Context context) {
+        SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
+        double longitude = Double.parseDouble(config.getString(PREFERENCES_LONGITUDE, ""));
+        double latitude = Double.parseDouble(config.getString(PREFERENCES_LATITUDE, ""));
+        return new AstroCalculator.Location(latitude,longitude);
     }
 
     private static AstroDateTime getAstroDateTime() {
@@ -32,25 +63,25 @@ public class AstroTools {
         return new AstroDateTime(year, month, day, hour, minute, second, timeZone, daylightSaving);
     }
 
-    public static String getCurrentTime() {
+    static String getCurrentTime() {
         return new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new GregorianCalendar().getTime());
     }
 
-    public static String timeFormat(AstroDateTime dateTime) {
+    static String timeFormat(AstroDateTime dateTime) {
         GregorianCalendar cal = astroDateTimeToGregorianCalendar(dateTime);
         return new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(cal.getTime());
     }
 
-    public static String dateFormat(AstroDateTime dateTime) {
+    static String dateFormat(AstroDateTime dateTime) {
         GregorianCalendar cal = astroDateTimeToGregorianCalendar(dateTime);
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(cal.getTime());
     }
 
-    public static String azimuthFormat(double azimuth) {
+    static String azimuthFormat(double azimuth) {
         return String.format(Locale.getDefault(), "%.2f", azimuth);
     }
 
-    public static String illuminationFormat(double illumination) {
+    static String illuminationFormat(double illumination) {
         return String.format(Locale.getDefault(), "%.2f%%", illumination * 100);
     }
 

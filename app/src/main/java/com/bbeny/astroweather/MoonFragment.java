@@ -1,6 +1,7 @@
 package com.bbeny.astroweather;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 
 import com.astrocalculator.AstroCalculator;
 
-public class MoonFragment extends Fragment implements IAstroFragment{
+public class MoonFragment extends Fragment {
 
     TextView moonriseTime;
     TextView moonsetTime;
@@ -17,6 +18,9 @@ public class MoonFragment extends Fragment implements IAstroFragment{
     TextView newMoon;
     TextView illumination;
     TextView moonAge;
+    AstroCalculator.MoonInfo moonInfo;
+    Handler h;
+    int delay;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,18 +31,30 @@ public class MoonFragment extends Fragment implements IAstroFragment{
         newMoon = (TextView) view.findViewById(R.id.newMoon);
         illumination = (TextView) view.findViewById(R.id.illumination);
         moonAge = (TextView) view.findViewById(R.id.moonAge);
+        moonInfo = AstroTools.getAstroCalculator(getContext()).getMoonInfo();
+        h = new Handler();
+        delay = AstroTools.getRefreshRate(getContext());
+        setInfo();
         update();
         return view;
     }
 
-    public void update() {
-        AstroCalculator.MoonInfo moonInfo = AstroTools.getAstroCalculator().getMoonInfo();
+    private void setInfo() {
         moonriseTime.setText(AstroTools.timeFormat(moonInfo.getMoonrise()));
         moonsetTime.setText(AstroTools.timeFormat(moonInfo.getMoonset()));
         fullMoon.setText(AstroTools.dateFormat(moonInfo.getNextFullMoon()));
         newMoon.setText(AstroTools.dateFormat(moonInfo.getNextNewMoon()));
         illumination.setText(AstroTools.illuminationFormat(moonInfo.getIllumination()));
         moonAge.setText(AstroTools.azimuthFormat(moonInfo.getAge() / 7));
+    }
+
+    private void update() {
+        h.postDelayed(new Runnable(){
+            public void run(){
+                setInfo();
+                h.postDelayed(this, delay);
+            }
+        }, delay);
     }
 
 }

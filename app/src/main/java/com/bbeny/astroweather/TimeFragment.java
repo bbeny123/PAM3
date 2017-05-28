@@ -23,8 +23,8 @@ public class TimeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_time, container, false);
         time = (TextView) view.findViewById(R.id.time);
         latitude = (TextView) view.findViewById(R.id.latitude);
-        longitude = (TextView) view.findViewById(R.id.longitude);
-        setText();
+        longitude = (TextView) view.findViewById(R.id.textview16);
+        setInfo();
         update();
         return view;
     }
@@ -34,14 +34,16 @@ public class TimeFragment extends Fragment {
         final int delay = 1000;
         h.postDelayed(new Runnable(){
             public void run(){
-                setText();
+                time.setText(AstroTools.getCurrentTime());
                 h.postDelayed(this, delay);
             }
         }, delay);
     }
 
-    private void setText() {
+    private void setInfo() {
         time.setText(AstroTools.getCurrentTime());
+        latitude.setText(AstroTools.getLatitude(getContext()));
+        longitude.setText(AstroTools.getLongitude(getContext()));
     }
 
 }

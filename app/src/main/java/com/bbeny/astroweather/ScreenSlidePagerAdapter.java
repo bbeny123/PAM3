@@ -5,17 +5,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by bbeny on 27.05.2017.
  */
 
-public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
     private static final int NUM_PAGES = 3;
-    private final List<Fragment> mFragmentList = new ArrayList<>();
+    private final ArrayList<Fragment> mFragmentList = new ArrayList<>();
 
-    public ScreenSlidePagerAdapter(FragmentManager fm) {
+    ScreenSlidePagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -24,7 +23,7 @@ public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         return mFragmentList.get(position);
     }
 
-    public void addFragment(Fragment fragment) {
+    void addFragment(Fragment fragment) {
         mFragmentList.add(fragment);
     }
 
@@ -32,4 +31,5 @@ public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return NUM_PAGES;
     }
+
 }
