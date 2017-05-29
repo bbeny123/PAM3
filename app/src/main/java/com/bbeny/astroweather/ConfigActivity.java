@@ -47,7 +47,7 @@ public class ConfigActivity extends Activity implements View.OnClickListener {
     private void saveConfig() {
         SharedPreferences.Editor preferencesEditor = config.edit();
         String longitude = checkString(longitudeConfig.getText().toString(), -180, 180);
-        String latitude = checkString(latitudeConfig.getText().toString(), -72, 73);
+        String latitude = checkString(latitudeConfig.getText().toString(), -90, 90);
         String refresh = checkString(refreshConfig.getText().toString(), 1, 60);
         preferencesEditor.putString(PREFERENCES_LONGITUDE, longitude);
         preferencesEditor.putString(PREFERENCES_LATITUDE, latitude);
@@ -58,6 +58,7 @@ public class ConfigActivity extends Activity implements View.OnClickListener {
     private String checkString(String s, int min, int max) {
         DecimalFormat format = new DecimalFormat();
         format.setDecimalSeparatorAlwaysShown(false);
+        format.setMaximumFractionDigits(4);
         try {
             double temp = Double.parseDouble(s);
             temp = Math.min(temp, max);

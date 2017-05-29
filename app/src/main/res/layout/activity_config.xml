@@ -35,7 +35,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
         android:layout_weight="1"
-        android:text="(-72 to 73)"
+        android:text="(-90 to 90)"
         android:textAlignment="center"
         android:textColor="@android:color/holo_green_dark"
         android:textSize="8sp"

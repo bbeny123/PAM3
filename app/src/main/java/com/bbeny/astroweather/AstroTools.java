@@ -78,7 +78,10 @@ class AstroTools {
     }
 
     static String azimuthFormat(double azimuth) {
-        return String.format(Locale.getDefault(), "%.2f", azimuth);
+        if (!Double.isNaN(azimuth))
+            return String.format(Locale.getDefault(), "%.2f", azimuth);
+        else
+            return "AstroLib Error";
     }
 
     static String illuminationFormat(double illumination) {

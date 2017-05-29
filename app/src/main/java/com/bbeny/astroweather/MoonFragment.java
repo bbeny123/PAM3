@@ -40,8 +40,14 @@ public class MoonFragment extends Fragment {
     }
 
     private void setInfo() {
-        moonriseTime.setText(AstroTools.timeFormat(moonInfo.getMoonrise()));
-        moonsetTime.setText(AstroTools.timeFormat(moonInfo.getMoonset()));
+        if (moonInfo.getMoonrise() != null)
+            moonriseTime.setText(AstroTools.timeFormat(moonInfo.getMoonrise()));
+        else
+            moonriseTime.setText("AstroLib Error");
+        if (moonInfo.getMoonset() != null)
+            moonsetTime.setText(AstroTools.timeFormat(moonInfo.getMoonset()));
+        else
+            moonsetTime.setText("AstroLib Error");
         fullMoon.setText(AstroTools.dateFormat(moonInfo.getNextFullMoon()));
         newMoon.setText(AstroTools.dateFormat(moonInfo.getNextNewMoon()));
         illumination.setText(AstroTools.illuminationFormat(moonInfo.getIllumination()));
