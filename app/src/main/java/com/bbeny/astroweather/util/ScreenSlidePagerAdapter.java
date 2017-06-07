@@ -14,7 +14,7 @@ public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
     private static final int NUM_PAGES = 3;
     private final ArrayList<Fragment> mFragmentList = new ArrayList<>();
 
-    ScreenSlidePagerAdapter(FragmentManager fm) {
+    public ScreenSlidePagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
