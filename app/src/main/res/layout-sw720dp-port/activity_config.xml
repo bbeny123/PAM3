@@ -7,7 +7,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:background="@color/colorBackground"
-    tools:context="com.bbeny.astroweather.ConfigActivity">
+    tools:context="com.bbeny.astroweather.activity.ConfigActivity">
 
     <TextView
         android:id="@+id/textView2"

@@ -1,11 +1,19 @@
-package com.bbeny.astroweather;
+package com.bbeny.astroweather.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.bbeny.astroweather.db.PlaceModel;
+import com.bbeny.astroweather.R;
+import com.bbeny.astroweather.async.RetrieveJson;
+import com.bbeny.astroweather.db.AstroDb;
+
+import java.util.List;
 
 /**
  * Created by bbeny on 28.05.2017.
@@ -28,6 +36,24 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         astroCalcButton.setOnClickListener(this);
         Button configButton = (Button) findViewById(R.id.configButton);
         configButton.setOnClickListener(this);
+        try {
+            new RetrieveJson(getApplicationContext()).execute().get();
+        } catch(Exception e) {
+
+        }
+
+        AstroDb astro = new AstroDb(getApplicationContext());
+        astro.open();
+        List<PlaceModel> a = astro.getAllPlaces();
+        for(PlaceModel b: a) {
+            Log.d("id", Integer.toString(b.getId()));
+            Log.d("woeid", b.getWoeid());
+            Log.d("content", b.getContent());
+            Log.d("latitude", b.getLatitude());
+            Log.d("longitude", b.getLongitude());
+            Log.d("timeZone", b.getTimeZone());
+        }
+        astro.close();
 
     }
 

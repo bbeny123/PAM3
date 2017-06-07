@@ -1,8 +1,14 @@
-package com.bbeny.astroweather;
+package com.bbeny.astroweather.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+
+import com.bbeny.astroweather.R;
+import com.bbeny.astroweather.util.ScreenSlidePagerAdapter;
+import com.bbeny.astroweather.fragment.MoonFragment;
+import com.bbeny.astroweather.fragment.SunFragment;
+import com.bbeny.astroweather.fragment.TimeFragment;
 
 public class MainActivity extends FragmentActivity  {
     private ViewPager mPager;

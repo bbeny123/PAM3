@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:background="@color/colorBackground"
     android:gravity="center"
-    tools:context="com.bbeny.astroweather.ConfigActivity">
+    tools:context="com.bbeny.astroweather.activity.ConfigActivity">
 
     <LinearLayout
         android:baselineAligned="false"

@@ -1,4 +1,4 @@
-package com.bbeny.astroweather;
+package com.bbeny.astroweather.activity;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.bbeny.astroweather.R;
 
 import java.text.DecimalFormat;
 

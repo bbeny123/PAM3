@@ -1,4 +1,4 @@
-package com.bbeny.astroweather;
+package com.bbeny.astroweather.util;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Created by bbeny on 27.05.2017.
  */
 
-class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
     private static final int NUM_PAGES = 3;
     private final ArrayList<Fragment> mFragmentList = new ArrayList<>();
 
@@ -23,7 +23,7 @@ class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         return mFragmentList.get(position);
     }
 
-    void addFragment(Fragment fragment) {
+    public void addFragment(Fragment fragment) {
         mFragmentList.add(fragment);
     }
 

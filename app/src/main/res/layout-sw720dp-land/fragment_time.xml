@@ -6,7 +6,7 @@
     android:background="@color/colorTime"
     android:gravity="center"
     android:orientation="horizontal"
-    tools:context="com.bbeny.astroweather.TimeFragment">
+    tools:context="com.bbeny.astroweather.fragment.TimeFragment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="320dp"

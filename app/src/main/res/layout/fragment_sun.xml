@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="horizontal"
     android:background="@color/colorBackground"
-    tools:context="com.bbeny.astroweather.SunFragment">
+    tools:context="com.bbeny.astroweather.fragment.SunFragment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="wrap_content"

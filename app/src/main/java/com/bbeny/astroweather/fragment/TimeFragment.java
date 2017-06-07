@@ -1,4 +1,4 @@
-package com.bbeny.astroweather;
+package com.bbeny.astroweather.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.bbeny.astroweather.util.AstroTools;
+import com.bbeny.astroweather.R;
 
 /**
  * Created by bbeny on 28.05.2017.

@@ -1,14 +1,17 @@
-package com.bbeny.astroweather;
+package com.bbeny.astroweather.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.astrocalculator.AstroCalculator;
+import com.bbeny.astroweather.util.AstroTools;
+import com.bbeny.astroweather.R;
 
 public class SunFragment extends Fragment {
 
@@ -36,6 +39,7 @@ public class SunFragment extends Fragment {
         delay = AstroTools.getRefreshRate(getContext());
         setInfo();
         update();
+        Log.d("CHUJ", "CHUJ");
         return view;
     }
 

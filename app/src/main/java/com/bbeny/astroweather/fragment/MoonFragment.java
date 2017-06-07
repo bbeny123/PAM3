@@ -1,4 +1,4 @@
-package com.bbeny.astroweather;
+package com.bbeny.astroweather.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.astrocalculator.AstroCalculator;
+import com.bbeny.astroweather.util.AstroTools;
+import com.bbeny.astroweather.R;
 
 public class MoonFragment extends Fragment {
 

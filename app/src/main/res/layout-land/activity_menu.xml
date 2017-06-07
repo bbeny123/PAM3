@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context="com.bbeny.astroweather.MenuActivity">
+    tools:context="com.bbeny.astroweather.activity.MenuActivity">
 
     <TextView
         android:id="@+id/textView"
