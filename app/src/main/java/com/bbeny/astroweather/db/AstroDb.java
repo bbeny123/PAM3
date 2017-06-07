@@ -13,6 +13,8 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.bbeny.astroweather.model.PlaceModel;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.bbeny.astroweather.db;
+package com.bbeny.astroweather.model;
 
 /**
  * Created by bbeny on 07.06.2017.

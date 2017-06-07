@@ -7,16 +7,21 @@ import android.util.Log;
 
 import com.astrocalculator.AstroCalculator;
 import com.astrocalculator.AstroDateTime;
+import com.bbeny.astroweather.model.WeatherModel;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -29,48 +34,15 @@ public class AstroTools {
     private static final String PREFERENCES_LONGITUDE = "longitudeField";
     private static final String PREFERENCES_LATITUDE = "latitudeField";
     private static final String PREFERENCES_REFRESH = "refreshField";
+    private static final String PREFERENCES_WEATHER = "weather";
 
-    private static void test2(String result) {
-        try {
-            JSONObject reader = new JSONObject(result);
-            JSONObject sys = reader.getJSONObject("query");
-            String temp = sys.getString("count");
-            Log.d("count", temp);
-        } catch (Exception e) {
-            Log.d("Exception", "Excep");
-        }
-    }
-
-    public static void test() {
-        String address = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places(1)%20where%20text=%22dmosin%22&format=json";
-        InputStream in = null;
-        HttpURLConnection urlConnection = null;
-        try {
-            System.out.println("ADDRESS: " + address);
-            URL url = new URL(address);
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setConnectTimeout(20000);
-            urlConnection.setReadTimeout(20000);
-            urlConnection.setDoOutput(true);
-            urlConnection.setRequestMethod("GET");
-            urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_ACCEPTED)
-                in = new BufferedInputStream(urlConnection.getInputStream());
-            String resultString = readStream(in);
-            System.out.println(resultString);
-            test2(resultString);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (urlConnection != null) urlConnection.disconnect();
-        }
-    }
-
-    private static String readStream(InputStream in) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        for (int c; (c = in.read()) >= 0;) sb.append((char) c);
-        return sb.toString();
+    public static List<WeatherModel> getWeatherList(final Context context) {
+        SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
+        String temp = config.getString(PREFERENCES_WEATHER, "");
+        if(temp.length() == 0)
+            return null;
+        Type type = new TypeToken<List<WeatherModel>>(){}.getType();
+        return new Gson().fromJson(temp, type);
     }
 
     public static int getRefreshRate(final Context context) {
