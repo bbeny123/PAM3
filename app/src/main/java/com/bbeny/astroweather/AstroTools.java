@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 /**
- * Created by bbeny on 27.05.2017.
+ * Created by Beny on 27.05.2017.
  */
 
 class AstroTools {
