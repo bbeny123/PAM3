@@ -10,12 +10,12 @@
     android:weightSum="1">
 
     <fragment
-        android:id="@+id/fragment2"
+        android:id="@+id/todayFragment"
         android:name="com.bbeny.astroweather.fragment.TimeFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.15"
-        tools:layout="@layout/fragment_time" />
+        tools:layout="@layout/fragment_today" />
 
     <LinearLayout
         android:baselineAligned="false"
@@ -25,20 +25,20 @@
         android:orientation="horizontal">
 
         <fragment
-            android:id="@+id/sunFragment"
+            android:id="@+id/nonweatherFragment"
             android:name="com.bbeny.astroweather.fragment.SunFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            tools:layout="@layout/fragment_sun" />
+            tools:layout="@layout/fragment_nonweather" />
 
         <fragment
-            android:id="@+id/moonFragment"
+            android:id="@+id/forecastFragment"
             android:name="com.bbeny.astroweather.fragment.MoonFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            tools:layout="@layout/fragment_moon" />
+            tools:layout="@layout/fragment_forecast" />
 
     </LinearLayout>
 
