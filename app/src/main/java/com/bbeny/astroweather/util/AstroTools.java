@@ -4,23 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
-import com.astrocalculator.AstroCalculator;
-import com.astrocalculator.AstroDateTime;
+import com.bbeny.astroweather.async.PlaceWeatherLoad;
 import com.bbeny.astroweather.model.PlaceModel;
 import com.bbeny.astroweather.model.WeatherModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -32,11 +27,49 @@ import java.util.Locale;
 public class AstroTools {
 
     private static final String PREFERENCES_NAME = "astroPreferences";
-    private static final String PREFERENCES_LONGITUDE = "longitudeField";
-    private static final String PREFERENCES_LATITUDE = "latitudeField";
-    private static final String PREFERENCES_REFRESH = "refreshField";
     private static final String PREFERENCES_WEATHER = "weather";
     private static final String PREFERENCES_PLACE = "place";
+    private static final String PREFERENCES_UNIT = "unit";
+    private static final String PREFERENCES_REFRESH_DATE = "refresh";
+    private static final String GET_WEATHER = "weather";
+
+    public static void saveRefreshDate(final Context context) {
+        Date date = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, 1);
+        date = c.getTime();
+        SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
+        config.edit().putLong(PREFERENCES_REFRESH_DATE, date.getTime()).apply();
+    }
+
+    public static void shouldRefresh(final Context context) {
+        long currentDate = new Date().getTime();
+        SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
+        long refreshDate = config.getLong(PREFERENCES_REFRESH_DATE, 0);
+        if (currentDate > refreshDate)
+            refreshWeatherData(context);
+    }
+
+    public static void refreshWeatherData(final Context context) {
+        String woeid = getCurrentWoeid(context);
+        if(woeid == null)
+            return;
+        try {
+            int result = new PlaceWeatherLoad(context).execute(GET_WEATHER, woeid).get();
+            if(result == AstroStatuses.OK)
+                saveRefreshDate(context);
+            else
+                toast(getToastMsg(result), context);
+        } catch(Exception e) {
+            Log.d("REFRESH", e.toString());
+        }
+    }
+
+    private static void toast(String msg, final Context context) {
+        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
     public static List<WeatherModel> getWeatherList(final Context context) {
         SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
@@ -63,72 +96,23 @@ public class AstroTools {
         return null;
     }
 
-    public static int getRefreshRate(final Context context) {
+    public static int getCurrentUnits(final Context context) {
         SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        return Integer.parseInt(config.getString(PREFERENCES_REFRESH, "15")) * 60000;
-    }
-
-    public static String getLatitude(final Context context) {
-        SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        return config.getString(PREFERENCES_LATITUDE, "");
-    }
-
-    public static String getLongitude(final Context context) {
-        SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        return config.getString(PREFERENCES_LONGITUDE, "");
-    }
-
-    public static AstroCalculator getAstroCalculator(final Context context) {
-        AstroDateTime astroDateTime = getAstroDateTime();
-        AstroCalculator.Location astroLocation = getAstroLocation(context);
-        return new AstroCalculator(astroDateTime, astroLocation);
-    }
-
-    private static AstroCalculator.Location getAstroLocation(final Context context) {
-        SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        double longitude = Double.parseDouble(config.getString(PREFERENCES_LONGITUDE, ""));
-        double latitude = Double.parseDouble(config.getString(PREFERENCES_LATITUDE, ""));
-        return new AstroCalculator.Location(latitude,longitude);
-    }
-
-    private static AstroDateTime getAstroDateTime() {
-        GregorianCalendar cal = new GregorianCalendar();
-        int year = cal.get(GregorianCalendar.YEAR);
-        int month = cal.get(GregorianCalendar.MONTH);
-        int day = cal.get(GregorianCalendar.DAY_OF_MONTH);
-        int hour = cal.get(GregorianCalendar.HOUR_OF_DAY);
-        int minute = cal.get(GregorianCalendar.MINUTE);
-        int second = cal.get(GregorianCalendar.SECOND);
-        int timeZone = cal.get(GregorianCalendar.ZONE_OFFSET) / 3600000;
-        boolean daylightSaving = cal.getTimeZone().inDaylightTime(cal.getTime());
-        return new AstroDateTime(year, month, day, hour, minute, second, timeZone, daylightSaving);
+        return config.getInt(PREFERENCES_UNIT, 0);
     }
 
     public static String getCurrentTime() {
-        return new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new GregorianCalendar().getTime());
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new GregorianCalendar().getTime());
     }
 
-    public static String timeFormat(AstroDateTime dateTime) {
-        GregorianCalendar cal = astroDateTimeToGregorianCalendar(dateTime);
-        return new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(cal.getTime());
-    }
-
+    /*
     public static String dateFormat(AstroDateTime dateTime) {
         GregorianCalendar cal = astroDateTimeToGregorianCalendar(dateTime);
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(cal.getTime());
     }
+    */
 
-    public static String azimuthFormat(double azimuth) {
-        if (!Double.isNaN(azimuth))
-            return String.format(Locale.getDefault(), "%.2f", azimuth);
-        else
-            return "AstroLib Error";
-    }
-
-    public static String illuminationFormat(double illumination) {
-        return String.format(Locale.getDefault(), "%.2f%%", illumination * 100);
-    }
-
+    /*
     private static GregorianCalendar astroDateTimeToGregorianCalendar(AstroDateTime dateTime) {
         int year = dateTime.getYear();
         int month = dateTime.getMonth();
@@ -138,6 +122,7 @@ public class AstroTools {
         int second = dateTime.getSecond();
         return new GregorianCalendar(year, month, day, hour, minute, second);
     }
+    */
 
     public static String getToastMsg(int errorCode) {
         switch(errorCode) {

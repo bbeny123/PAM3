@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,21 +16,11 @@ import com.bbeny.astroweather.R;
 import com.bbeny.astroweather.async.PlaceWeatherLoad;
 import com.bbeny.astroweather.db.AstroDb;
 import com.bbeny.astroweather.model.PlaceModel;
-import com.bbeny.astroweather.model.WeatherModel;
 import com.bbeny.astroweather.util.AstroStatuses;
 import com.bbeny.astroweather.util.AstroTools;
 import com.google.gson.Gson;
 
-import java.text.DecimalFormat;
 import java.util.List;
-
-import static android.R.attr.duration;
-import static android.R.id.list;
-import static com.bbeny.astroweather.R.id.longitudeConfig;
-import static com.bbeny.astroweather.R.id.placeSpinner;
-import static com.bbeny.astroweather.R.id.refreshConfig;
-import static com.bbeny.astroweather.R.id.unitSpinner;
-import static com.bbeny.astroweather.util.AstroTools.getCurrentPlace;
 
 /**
  * Created by bbeny on 28.05.2017.
@@ -86,6 +75,7 @@ public class ConfigActivity extends Activity implements View.OnClickListener  {
     @Override
     protected void onPause() {
         saveConfig();
+        AstroTools.refreshWeatherData(context);
         super.onPause();
     }
 

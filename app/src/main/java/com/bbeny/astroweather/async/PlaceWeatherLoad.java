@@ -11,6 +11,7 @@ import com.bbeny.astroweather.db.AstroDb;
 import com.bbeny.astroweather.model.PlaceModel;
 import com.bbeny.astroweather.model.WeatherModel;
 import com.bbeny.astroweather.util.AstroStatuses;
+import com.bbeny.astroweather.util.AstroTools;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -35,7 +36,8 @@ public class PlaceWeatherLoad extends AsyncTask<String, Void, Integer> {
     private static final String PREFERENCES_WEATHER = "weather";
     private static final String GET_PLACE = "place";
     private static final String GET_WEATHER = "weather";
-    private static final String CELSIUS = "YES";
+    private static final int UNIT_C = 0;
+    private static final int UNIT_F = 1;
 
     private Context context;
     private AstroDb astroDb;
@@ -54,12 +56,9 @@ public class PlaceWeatherLoad extends AsyncTask<String, Void, Integer> {
             String place = params[1];
             result = place(place);
         }
-        if(params[0].equals(GET_WEATHER)) {
+        else if(params[0].equals(GET_WEATHER)) {
             String woeid = params[1];
-            if(params.length > 2 && params[2].equals(CELSIUS))
-                result = weather(woeid, true);
-            else
-                result = weather(woeid, false);
+            result = weather(woeid, AstroTools.getCurrentUnits(context) == UNIT_C);
         }
         return result;
     }

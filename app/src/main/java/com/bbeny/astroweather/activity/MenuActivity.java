@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.bbeny.astroweather.R;
+import com.bbeny.astroweather.util.AstroTools;
 
 /**
  * Created by bbeny on 28.05.2017.
@@ -20,14 +21,7 @@ import com.bbeny.astroweather.R;
 public class MenuActivity extends Activity implements View.OnClickListener {
 
     private static final String PREFERENCES_NAME = "astroPreferences";
-    private static final String PREFERENCES_LONGITUDE = "longitudeField";
-    private static final String PREFERENCES_LATITUDE = "latitudeField";
-    private static final String PREFERENCES_REFRESH = "refreshField";
     private static final String PREFERENCES_PLACE = "place";
-    private static final String PREFERENCES_UNIT = "unit";
-    private static final String GET_PLACE = "place";
-    private static final String GET_WEATHER = "weather";
-    private static final String CELSIUS = "YES";
     private SharedPreferences config;
 
     @Override
@@ -39,34 +33,33 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         astroCalcButton.setOnClickListener(this);
         Button configButton = (Button) findViewById(R.id.configButton);
         configButton.setOnClickListener(this);
-        if(!isOnline()) {
-            Toast toast = Toast.makeText(getApplicationContext(), "INTERNET", Toast.LENGTH_SHORT);
-            toast.show();
+        Button refreshButton = (Button) findViewById(R.id.refreshButton);
+        refreshButton.setOnClickListener(this);
+        if(checkConfig()) {
+            if(!isOnline()) {
+                Toast toast = Toast.makeText(getApplicationContext(), "No internet connection! Data could be outdated!", Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
+                AstroTools.shouldRefresh(getApplicationContext());
+            }
         }
-        /*
-        try {
-            new PlaceWeatherLoad(getApplicationContext()).execute(GET_WEATHER, "20070464").get();
-        } catch(Exception e) {
-            Log.d("MAIN", "EXE");
-        }
-        */
-
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.mainButton: {
+            case R.id.mainButton:
                 if(checkConfig()) {
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                     break;
                 }
-            }
-            case R.id.configButton: {
+            case R.id.configButton:
                 Intent intent = new Intent(this, ConfigActivity.class);
                 startActivity(intent);
                 break;
-            }
+            case R.id.refreshButton:
+                AstroTools.refreshWeatherData(getApplicationContext());
+                break;
         }
     }
 
@@ -78,6 +71,6 @@ public class MenuActivity extends Activity implements View.OnClickListener {
     }
 
     private boolean checkConfig() {
-        return config.getString(PREFERENCES_PLACE, "").length() > 0 && config.getInt(PREFERENCES_UNIT, -1) > 0;
+        return config.getString(PREFERENCES_PLACE, "").length() > 0;
     }
 }

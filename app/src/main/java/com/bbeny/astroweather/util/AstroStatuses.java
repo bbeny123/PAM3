@@ -6,9 +6,9 @@ package com.bbeny.astroweather.util;
 
 public interface AstroStatuses {
     int OK = 1;
-    int DB_ERROR = 5;
-    int PLACE_NOT_FOUND = 6;
-    int YAHOO_ERROR = 8;
-    int CONNECTION_ERROR = 7;
     int ERROR = 2;
+    int DB_ERROR = 3;
+    int PLACE_NOT_FOUND = 4;
+    int YAHOO_ERROR = 5;
+    int CONNECTION_ERROR = 6;
 }
