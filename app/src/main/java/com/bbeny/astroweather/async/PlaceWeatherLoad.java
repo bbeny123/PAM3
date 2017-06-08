@@ -106,11 +106,11 @@ public class PlaceWeatherLoad extends AsyncTask<String, Void, Integer> {
             String unitSpeed = units.getString("speed");
             String unitTemperature = units.getString("temperature");
             /* wind */
-            String windSpeed = channel.getJSONObject("wind").getString("speed") + unitSpeed;
+            String windSpeed = channel.getJSONObject("wind").getString("speed") + " " + unitSpeed;
             /* atmosphere */
             JSONObject atmosphere = channel.getJSONObject("atmosphere");
             String humidity = atmosphere.getString("humidity");
-            String pressure = atmosphere.getString("pressure") + unitPressure;
+            String pressure = atmosphere.getString("pressure") + " " + unitPressure;
             /* astronomy */
             JSONObject astronomy = channel.getJSONObject("astronomy");
             String sunrise = astronomy.getString("sunrise");
@@ -123,9 +123,9 @@ public class PlaceWeatherLoad extends AsyncTask<String, Void, Integer> {
             /* today */
             JSONObject weather = forecast.getJSONObject(0);
             String todayDate = today.getString("date");
-            String todayTemp = today.getString("temp") + unitTemperature;
-            String todayHighTemp = weather.getString("high") + unitTemperature;
-            String todayLowTemp = weather.getString("low") + unitTemperature;
+            String todayTemp = today.getString("temp") + " \u00b0" + unitTemperature;
+            String todayHighTemp = weather.getString("high") + " \u00b0"  + unitTemperature;
+            String todayLowTemp = weather.getString("low") + " \u00b0"  + unitTemperature;
             String todayText = today.getString("text");
             WeatherModel todayWeather = new WeatherModel(windSpeed, humidity, pressure, sunrise, sunset, todayDate, todayTemp, todayHighTemp, todayLowTemp, todayText);
             weatherModelList.add(todayWeather);
@@ -135,8 +135,8 @@ public class PlaceWeatherLoad extends AsyncTask<String, Void, Integer> {
                     break;
                 weather = forecast.getJSONObject(i);
                 String date = weather.getString("date");
-                String highTemp = weather.getString("high") + unitTemperature;
-                String lowTemp = weather.getString("low") + unitTemperature;
+                String highTemp = weather.getString("high") + " \u00b0"  + unitTemperature;
+                String lowTemp = weather.getString("low") + " \u00b0"  + unitTemperature;
                 String text = weather.getString("text");
                 WeatherModel weatherModel = new WeatherModel(date, highTemp, lowTemp, text);
                 weatherModelList.add(weatherModel);
@@ -197,8 +197,8 @@ public class PlaceWeatherLoad extends AsyncTask<String, Void, Integer> {
         try {
             URL url = new URL(address);
             urlConnection = (HttpsURLConnection) url.openConnection();
-            urlConnection.setConnectTimeout(20000);
-            urlConnection.setReadTimeout(20000);
+            urlConnection.setConnectTimeout(5000);
+            urlConnection.setReadTimeout(5000);
             urlConnection.setDoOutput(true);
             urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");

@@ -31,10 +31,7 @@ public class ConfigActivity extends Activity implements View.OnClickListener  {
     private static final String PREFERENCES_NAME = "astroPreferences";
     private static final String PREFERENCES_PLACE = "place";
     private static final String PREFERENCES_UNIT = "unit";
-    private static final int UNIT_C = 0;
-    private static final int UNIT_F = 1;
     private static final String GET_PLACE = "place";
-    private static final String GET_WEATHER = "weather";
     private static final String CONFIG_TAG = "CONFIG";
     private SharedPreferences config;
 
@@ -49,7 +46,7 @@ public class ConfigActivity extends Activity implements View.OnClickListener  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
         config = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        Button okButton = (Button) findViewById(R.id.configButton);
+        Button okButton = (Button) findViewById(R.id.okButton);
         okButton.setOnClickListener(this);
         Button addButton = (Button) findViewById(R.id.addButton);
         addButton.setOnClickListener(this);
@@ -81,7 +78,7 @@ public class ConfigActivity extends Activity implements View.OnClickListener  {
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.configButton:
+            case R.id.okButton:
                 finish();
                 break;
             case R.id.addButton:
