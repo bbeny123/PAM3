@@ -1,12 +1,16 @@
 package com.bbeny.astroweather.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.bbeny.astroweather.model.PlaceModel;
 import com.bbeny.astroweather.R;
@@ -29,6 +33,8 @@ public class MenuActivity extends Activity implements View.OnClickListener {
     private static final String PREFERENCES_LONGITUDE = "longitudeField";
     private static final String PREFERENCES_LATITUDE = "latitudeField";
     private static final String PREFERENCES_REFRESH = "refreshField";
+    private static final String PREFERENCES_PLACE = "place";
+    private static final String PREFERENCES_UNIT = "unit";
     private static final String GET_PLACE = "place";
     private static final String GET_WEATHER = "weather";
     private static final String CELSIUS = "YES";
@@ -43,6 +49,10 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         astroCalcButton.setOnClickListener(this);
         Button configButton = (Button) findViewById(R.id.configButton);
         configButton.setOnClickListener(this);
+        if(!isOnline()) {
+            Toast toast = Toast.makeText(getApplicationContext(), "INTERNET", Toast.LENGTH_SHORT);
+            toast.show();
+        }
         /*
         try {
             new PlaceWeatherLoad(getApplicationContext()).execute(GET_WEATHER, "20070464").get();
@@ -70,7 +80,14 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
     private boolean checkConfig() {
-        return config.getString(PREFERENCES_LONGITUDE, "").length() > 0 && config.getString(PREFERENCES_LATITUDE, "").length() > 0 && config.getString(PREFERENCES_REFRESH, "").length() > 0;
+        return config.getString(PREFERENCES_PLACE, "").length() > 0 && config.getInt(PREFERENCES_UNIT, -1) > 0;
     }
 }

@@ -56,6 +56,13 @@ public class AstroTools {
         return new Gson().fromJson(temp, type);
     }
 
+    public static String getCurrentWoeid(final Context context) {
+        PlaceModel placeModel = getCurrentPlace(context);
+        if(placeModel != null)
+            return placeModel.getWoeid();
+        return null;
+    }
+
     public static int getRefreshRate(final Context context) {
         SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
         return Integer.parseInt(config.getString(PREFERENCES_REFRESH, "15")) * 60000;

@@ -151,9 +151,12 @@ public class ConfigActivity extends Activity implements View.OnClickListener  {
     }
 
     private void savePlace(PlaceModel place) {
-        Gson gson = new Gson();
-        String jsonPlace = gson.toJson(place);
         SharedPreferences.Editor preferencesEditor = config.edit();
+        String jsonPlace = "";
+        if(place != null) {
+            Gson gson = new Gson();
+            jsonPlace = gson.toJson(place);
+        }
         preferencesEditor.putString(PREFERENCES_PLACE, jsonPlace);
         preferencesEditor.apply();
     }
