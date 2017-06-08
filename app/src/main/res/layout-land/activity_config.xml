@@ -87,7 +87,7 @@
                 android:textColor="@android:color/holo_green_light"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintHorizontal_bias="0.52"
+                app:layout_constraintHorizontal_bias="0.50"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
