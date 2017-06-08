@@ -7,21 +7,11 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.bbeny.astroweather.model.PlaceModel;
 import com.bbeny.astroweather.R;
-import com.bbeny.astroweather.async.PlaceWeatherLoad;
-import com.bbeny.astroweather.db.AstroDb;
-import com.bbeny.astroweather.model.WeatherModel;
-import com.bbeny.astroweather.util.AstroTools;
-
-import java.util.List;
-
-import static android.R.id.list;
 
 /**
  * Created by bbeny on 28.05.2017.
@@ -45,7 +35,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         config = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        Button astroCalcButton = (Button) findViewById(R.id.astroCalcButton);
+        Button astroCalcButton = (Button) findViewById(R.id.mainButton);
         astroCalcButton.setOnClickListener(this);
         Button configButton = (Button) findViewById(R.id.configButton);
         configButton.setOnClickListener(this);
@@ -65,7 +55,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.astroCalcButton: {
+            case R.id.mainButton: {
                 if(checkConfig()) {
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);

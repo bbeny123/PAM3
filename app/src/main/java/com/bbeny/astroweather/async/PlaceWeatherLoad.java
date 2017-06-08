@@ -131,7 +131,7 @@ public class PlaceWeatherLoad extends AsyncTask<String, Void, Integer> {
             WeatherModel todayWeather = new WeatherModel(windSpeed, humidity, pressure, sunrise, sunset, todayDate, todayTemp, todayHighTemp, todayLowTemp, todayText);
             weatherModelList.add(todayWeather);
             /* forecast */
-            for(int i = 1; i < 6 ; i++) {
+            for(int i = 1; i < 7 ; i++) {
                 if(forecast.isNull(i))
                     break;
                 weather = forecast.getJSONObject(i);

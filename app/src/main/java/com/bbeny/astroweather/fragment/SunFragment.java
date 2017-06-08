@@ -27,12 +27,12 @@ public class SunFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sun, container, false);
-        sunriseAzimuth = (TextView) view.findViewById(R.id.sunriseAzimuth);
-        sunriseTime = (TextView) view.findViewById(R.id.sunriseTime);
-        sunsetAzimuth = (TextView) view.findViewById(R.id.sunsetAzimuth);
+        View view = inflater.inflate(R.layout.fragment_nonweather, container, false);
+        sunriseAzimuth = (TextView) view.findViewById(R.id.windspeed);
+        sunriseTime = (TextView) view.findViewById(R.id.humidity);
+        sunsetAzimuth = (TextView) view.findViewById(R.id.sunriseTime);
         sunsetTime = (TextView) view.findViewById(R.id.sunsetTime);
-        morningTime = (TextView) view.findViewById(R.id.morningTime);
+        morningTime = (TextView) view.findViewById(R.id.dailyTemp);
         eveningTime = (TextView) view.findViewById(R.id.eveningTime);
         sunInfo = AstroTools.getAstroCalculator(getContext()).getSunInfo();
         h = new Handler();

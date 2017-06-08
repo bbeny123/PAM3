@@ -23,10 +23,10 @@ public class TimeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_time, container, false);
-        time = (TextView) view.findViewById(R.id.time);
-        latitude = (TextView) view.findViewById(R.id.latitude);
-        longitude = (TextView) view.findViewById(R.id.textView7);
+        View view = inflater.inflate(R.layout.fragment_today, container, false);
+        time = (TextView) view.findViewById(R.id.date);
+        latitude = (TextView) view.findViewById(R.id.dailyTemp);
+        longitude = (TextView) view.findViewById(R.id.textView2);
         setInfo();
         update();
         return view;

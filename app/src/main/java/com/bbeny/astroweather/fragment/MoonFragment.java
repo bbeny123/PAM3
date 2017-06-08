@@ -26,12 +26,12 @@ public class MoonFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_moon, container, false);
-        moonriseTime = (TextView) view.findViewById(R.id.moonriseTime);
-        moonsetTime = (TextView) view.findViewById(R.id.moonsetTime);
-        fullMoon = (TextView) view.findViewById(R.id.fullMoon);
-        newMoon = (TextView) view.findViewById(R.id.newMoon);
-        illumination = (TextView) view.findViewById(R.id.illumination);
+        View view = inflater.inflate(R.layout.fragment_forecast, container, false);
+        moonriseTime = (TextView) view.findViewById(R.id.temp1);
+        moonsetTime = (TextView) view.findViewById(R.id.temp2);
+        fullMoon = (TextView) view.findViewById(R.id.temp3);
+        newMoon = (TextView) view.findViewById(R.id.temp4);
+        illumination = (TextView) view.findViewById(R.id.temp5);
         moonAge = (TextView) view.findViewById(R.id.moonAge);
         moonInfo = AstroTools.getAstroCalculator(getContext()).getMoonInfo();
         h = new Handler();
