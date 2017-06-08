@@ -35,7 +35,6 @@
         android:id="@+id/addButton"
         android:layout_width="210dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="351dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -44,11 +43,9 @@
         android:backgroundTint="@android:color/holo_green_light"
         android:text="Add To Favourites"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placeText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/placeText" />
 
     <TextView
         android:id="@+id/textView"
