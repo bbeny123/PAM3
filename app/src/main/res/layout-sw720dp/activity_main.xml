@@ -11,7 +11,7 @@
 
     <fragment
         android:id="@+id/todayFragment"
-        android:name="com.bbeny.astroweather.fragment.TimeFragment"
+        android:name="com.bbeny.astroweather.fragment.TodayFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nonweatherFragment"
-        android:name="com.bbeny.astroweather.fragment.SunFragment"
+        android:name="com.bbeny.astroweather.fragment.ForecastFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.36"
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/forecastFragment"
-        android:name="com.bbeny.astroweather.fragment.MoonFragment"
+        android:name="com.bbeny.astroweather.fragment.NonweatherFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.54"

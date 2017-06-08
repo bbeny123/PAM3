@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:background="@color/colorBackground"
     android:baselineAligned="false"
-    tools:context="com.bbeny.astroweather.fragment.SunFragment">
+    tools:context="com.bbeny.astroweather.fragment.ForecastFragment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
