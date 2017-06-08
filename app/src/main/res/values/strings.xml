@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AstroWeather</string>
+    <string-array name="unit_array">
+        <item>C, km/h, mb</item>
+        <item>F, mph, in</item>
+    </string-array>
 </resources>

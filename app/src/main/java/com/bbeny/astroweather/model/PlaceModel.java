@@ -69,4 +69,9 @@ public class PlaceModel {
         this.timeZone = timeZone;
     }
 
+    @Override
+    public String toString() {
+        return this.content;
+    }
+
 }

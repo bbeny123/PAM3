@@ -26,7 +26,7 @@ public class TimeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_time, container, false);
         time = (TextView) view.findViewById(R.id.time);
         latitude = (TextView) view.findViewById(R.id.latitude);
-        longitude = (TextView) view.findViewById(R.id.longitude);
+        longitude = (TextView) view.findViewById(R.id.textView7);
         setInfo();
         update();
         return view;

@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.astrocalculator.AstroCalculator;
 import com.astrocalculator.AstroDateTime;
+import com.bbeny.astroweather.model.PlaceModel;
 import com.bbeny.astroweather.model.WeatherModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,6 +36,7 @@ public class AstroTools {
     private static final String PREFERENCES_LATITUDE = "latitudeField";
     private static final String PREFERENCES_REFRESH = "refreshField";
     private static final String PREFERENCES_WEATHER = "weather";
+    private static final String PREFERENCES_PLACE = "place";
 
     public static List<WeatherModel> getWeatherList(final Context context) {
         SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
@@ -42,6 +44,15 @@ public class AstroTools {
         if(temp.length() == 0)
             return null;
         Type type = new TypeToken<List<WeatherModel>>(){}.getType();
+        return new Gson().fromJson(temp, type);
+    }
+
+    public static PlaceModel getCurrentPlace(final Context context) {
+        SharedPreferences config = context.getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
+        String temp = config.getString(PREFERENCES_PLACE, "");
+        if(temp.length() == 0)
+            return null;
+        Type type = new TypeToken<PlaceModel>(){}.getType();
         return new Gson().fromJson(temp, type);
     }
 
@@ -119,5 +130,22 @@ public class AstroTools {
         int minute = dateTime.getMinute();
         int second = dateTime.getSecond();
         return new GregorianCalendar(year, month, day, hour, minute, second);
+    }
+
+    public static String getToastMsg(int errorCode) {
+        switch(errorCode) {
+            case AstroStatuses.CONNECTION_ERROR:
+                return "Internet connection problem, try again later!";
+            case AstroStatuses.DB_ERROR:
+                return "You already added this place";
+            case AstroStatuses.ERROR:
+                return "Oops! Something goes wrong :(";
+            case AstroStatuses.PLACE_NOT_FOUND:
+                return "Can't find typed place :(";
+            case AstroStatuses.YAHOO_ERROR:
+                return "Yahoo weather service error :(";
+            default:
+                return "Error";
+        }
     }
 }

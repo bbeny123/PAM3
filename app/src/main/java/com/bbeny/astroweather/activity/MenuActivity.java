@@ -43,40 +43,13 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         astroCalcButton.setOnClickListener(this);
         Button configButton = (Button) findViewById(R.id.configButton);
         configButton.setOnClickListener(this);
-        int result = -1;
+        /*
         try {
-            result = new PlaceWeatherLoad(getApplicationContext()).execute(GET_PLACE, "miasto").get();
+            new PlaceWeatherLoad(getApplicationContext()).execute(GET_WEATHER, "20070464").get();
         } catch(Exception e) {
             Log.d("MAIN", "EXE");
         }
-        String woeid = "1";
-        Log.d("result", Integer.toString(result));
-        AstroDb astro = new AstroDb(getApplicationContext());
-        astro.open();
-        List<PlaceModel> a = astro.getAllPlaces();
-        for(PlaceModel b: a) {
-            Log.d("id", Integer.toString(b.getId()));
-            Log.d("woeid", b.getWoeid());
-            woeid = b.getWoeid();
-            Log.d("content", b.getContent());
-            Log.d("latitude", b.getLatitude());
-            Log.d("longitude", b.getLongitude());
-            Log.d("timeZone", b.getTimeZone());
-        }
-        astro.close();
-        try {
-            result = new PlaceWeatherLoad(getApplicationContext()).execute(GET_WEATHER, woeid, CELSIUS).get();
-        } catch(Exception e) {
-            Log.d("MAIN", "EXE");
-        }
-        Log.d("result", Integer.toString(result));
-        List<WeatherModel> ab = AstroTools.getWeatherList(getApplicationContext());
-        for(WeatherModel b: ab) {
-            Log.d("date", b.getDate());
-            Log.d("highTemp", b.getHighTemp());
-            Log.d("lowTemp", b.getLowTemp());
-            Log.d("text", b.getText());
-        }
+        */
 
     }
 
