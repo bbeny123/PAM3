@@ -20,7 +20,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:layout_weight="1"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
@@ -35,21 +35,22 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="0dp"
             android:layout_weight="1"
-            android:textSize="36sp"
+            android:textAlignment="center"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.437"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/place"
-            app:layout_constraintVertical_bias="0.5"
-            tools:text="TextView" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Fri, 09 Jun 2017 12:00 PM CEST" />
 
     </android.support.constraint.ConstraintLayout>
 
